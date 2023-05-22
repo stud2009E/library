@@ -1,0 +1,32 @@
+@startuml
+object user {
+  user_id: pk
+  name: data
+}
+ 
+object user_book {
+ user_id: fk
+ book_id: fk
+}
+ 
+object book {
+  book_id: pk
+  articul: not null unique
+  title: data
+}
+ 
+object book_author {
+ articul: fk
+ author_id: fk
+}
+ 
+object author {
+ author_id: pk
+ name: data
+}
+ 
+user "1" --> "*" user_book
+book "1" --> "*" user_book
+book "1" --> "*" book_author
+author "1" --> "*" book_author
+@enduml
