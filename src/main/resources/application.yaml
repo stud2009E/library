@@ -2,3 +2,9 @@ server:
   servlet:
     context-path: /
   port: 8090
+spring:
+  datasource:
+    url: url
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
