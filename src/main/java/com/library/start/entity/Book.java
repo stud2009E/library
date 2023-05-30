@@ -28,6 +28,6 @@ public class Book {
     private Set<Author> authors;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 }
