@@ -1,26 +1,33 @@
 package com.library.start.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "book")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "book_id", nullable = false, unique = true)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "book_id", nullable = false)
     private int bookId;
 
-    @Type(type = "text")
     @Column(name="vendor_code", length = 10, nullable = false)
     private String vendorCode;
 
-    @Lob
-    @Column(name="title", nullable = false)
+    @Column(name="title", length = 300, nullable = false)
     private String title;
+
+    @ManyToMany(mappedBy = "book")
+    private Set<Author> authors;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
 }

@@ -23,6 +23,9 @@
             <column name="book_id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="user_id" type="int">
+                <constraints foreignKeyName="user_id" referencedTableName="user" nullable="true"/>
+            </column>
             <column name="vendor_code" type="char(10)" >
                 <constraints nullable="false"/>
             </column>
@@ -39,24 +42,15 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
-        <createTable tableName="user_book">
-            <column name="user_id" type="int"/>
-            <column name="book_id" type="int"/>
-        </createTable>
 
         <createTable tableName="book_author">
-            <column name="author_id" type="int"/>
-            <column name="book_id" type="int"/>
+            <column name="author_id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
-    </changeSet>
-
-    <changeSet id="add-key-to-user_book" author="liquibase">
-        <addForeignKeyConstraint baseTableName="user_book" baseColumnNames="user_id" constraintName="fk_user_id" referencedTableName="user"
-                                 referencedColumnNames="user_id" onDelete="CASCADE" deferrable="true"/>
-        <addForeignKeyConstraint baseTableName="user_book" baseColumnNames="book_id" constraintName="fk_book_id" referencedTableName="book"
-                                 referencedColumnNames="book_id" onDelete="CASCADE" deferrable="true"/>
-        <addPrimaryKey tableName="user_book" columnNames="user_id,book_id" constraintName="pk"/>
     </changeSet>
 
     <changeSet id="add-key-to-book_author" author="liquibase">
@@ -66,5 +60,4 @@
                                  referencedColumnNames="book_id" onDelete="CASCADE" deferrable="true"/>
         <addPrimaryKey tableName="book_author" columnNames="author_id,book_id" constraintName="pk"/>
     </changeSet>
-
 </databaseChangeLog>

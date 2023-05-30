@@ -3,25 +3,24 @@ package com.library.start.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Data
 @Table(name = "user")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    @NonNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id", nullable = false)
+    private int userId;
 
-    @NonNull
-    @Type(type = "text")
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
+
+
+    private List<Book> books;
 }
